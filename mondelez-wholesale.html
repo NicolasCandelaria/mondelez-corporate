@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondelez Corporate Apparel Portal | Billboard Agency International</title>
+<style>
+  :root {
+    --brand-purple: #502172;
+    --brand-red: #D01414;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --line: #e5e5e5;
+    --bg-soft: #f7f5f9;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  a { color: var(--brand-purple); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--brand-red); }
+  a:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 2px; border-radius: 2px; }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--brand-purple);
+    color: var(--white);
+    padding: 12px 16px;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 8px; top: 8px; color: var(--white); }
+
+  /* Header */
+  header {
+    background: var(--brand-purple);
+    color: var(--white);
+    padding: 20px 32px;
+    border-bottom: 4px solid var(--brand-red);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .brand small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.85;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  nav ul {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover, nav a:focus-visible { border-bottom-color: var(--white); color: var(--white); outline: none; }
+
+  /* Hero */
+  .hero {
+    background: var(--bg-soft);
+    padding: 48px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: 36px;
+    color: var(--brand-purple);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .hero p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 720px;
+  }
+  .hero-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .hero-meta strong { color: var(--ink); }
+
+  /* Main */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+  .section-title {
+    font-size: 24px;
+    color: var(--brand-purple);
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+
+  /* Product grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { box-shadow: 0 6px 20px rgba(80, 33, 114, 0.12); transform: translateY(-2px); }
+  .card-image {
+    height: 420px;
+    flex-shrink: 0;
+    background: var(--white);
+    display: block;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    line-height: 0;
+  }
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .detail-image {
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    line-height: 0;
+    overflow: hidden;
+  }
+  .detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: top;
+  }
+  .card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+  }
+  .card h3 {
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .card .brand-tag {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brand-red);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .card .sku {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--brand-purple);
+    color: var(--white);
+    border-color: var(--brand-purple);
+  }
+  .btn-primary:hover { background: var(--brand-red); border-color: var(--brand-red); color: var(--white); }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--brand-purple);
+    border-color: var(--brand-purple);
+  }
+  .btn-secondary:hover { background: var(--brand-purple); color: var(--white); }
+  .btn:focus-visible { outline: 3px solid var(--brand-red); outline-offset: 2px; }
+
+  /* Detail page styling */
+  .detail-wrap { display: none; }
+  .detail-wrap.active { display: block; }
+  .list-wrap.hidden { display: none; }
+
+  .breadcrumb {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .breadcrumb a { color: var(--brand-purple); }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 768px) {
+    .detail-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero h1 { font-size: 28px; }
+  }
+  .detail-info h2 {
+    font-size: 28px;
+    color: var(--brand-purple);
+    margin-bottom: 8px;
+  }
+  .detail-info .brand-tag {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brand-red);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .detail-info .sku {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .detail-info p.lead {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+
+  /* Pricing table */
+  .pricing {
+    margin-bottom: 32px;
+  }
+  .pricing h3 {
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--line);
+  }
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  th {
+    background: var(--brand-purple);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  tbody tr:nth-child(even) { background: var(--bg-soft); }
+  tbody tr:last-child td { border-bottom: none; }
+  .price-cell { font-weight: 700; color: var(--brand-purple); }
+
+  /* Info blocks */
+  .info-block {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    margin-bottom: 24px;
+  }
+  .info-block h3 {
+    font-size: 16px;
+    color: var(--brand-purple);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .info-block dl {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 10px 16px;
+  }
+  .info-block dt {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .info-block dd {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  .sustainability {
+    background: var(--bg-soft);
+    border-left: 4px solid var(--brand-purple);
+    padding: 20px 24px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+  }
+  .sustainability h3 {
+    color: var(--brand-purple);
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .sustainability p { font-size: 14px; color: var(--ink-soft); }
+  .badges { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .badge {
+    background: var(--white);
+    border: 1px solid var(--brand-purple);
+    color: var(--brand-purple);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: var(--white);
+    padding: 32px;
+    margin-top: 48px;
+    font-size: 14px;
+  }
+  footer .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer a { color: var(--white); }
+
+  /* Currency note */
+  .currency-note {
+    display: inline-block;
+    background: var(--brand-red);
+    color: var(--white);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      Mondelez Corporate Apparel Portal
+      <small>Distributed by Billboard Agency International</small>
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#main" onclick="showList()">Catalog</a></li>
+        <li><a href="#orders">My Orders</a></li>
+        <li><a href="#approvals">Approvals</a></li>
+        <li><a href="#account">Account</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- LIST VIEW -->
+<div class="list-wrap" id="listView">
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Mondelez Corporate Apparel Catalog</h1>
+      <p>Wholesale ordering portal for Mondelez International branded employee and event apparel. All garments are produced through our verified manufacturing partners in China with full art approval workflow. Pricing reflects landed cost to your distribution centre.</p>
+      <div class="hero-meta">
+        <span><strong>Production origin:</strong> China (verified partners)</span>
+        <span><strong>Lead time:</strong> 6 to 10 weeks from approved art</span>
+        <span><strong>Currency:</strong> CAD</span>
+        <span><strong>Min order:</strong> 100 units per SKU (50 for outerwear)</span>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <h2 class="section-title">Corporate Apparel Collection</h2>
+    <p class="section-sub">Six core styles for employee programs, leadership events, and field activations. Click any item to view full specs, sizing, pricing tiers, and decoration details.</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/1 unisex tee.jpg" alt="Mondelez Wave Unisex Tee in white and purple colorways">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Wave Unisex Tee (Two Colorways)</h3>
+          <p class="sku">SKU: MDZ-TEE-WAVE-001</p>
+          <p class="card-desc">Heavyweight cotton jersey with diagonal wave color block and stylized M chest mark. Available in white/purple and purple/white. Relaxed unisex fit for campus and event wear.</p>
+          <div class="card-actions">
+            <a href="#detail-wave-tee" class="btn btn-primary" onclick="showDetail('detail-wave-tee')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/Beanie.jpg" alt="Mondelez International ribbed beanie in off-white">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Ribbed Cuff Beanie</h3>
+          <p class="sku">SKU: MDZ-BNI-RIB-002</p>
+          <p class="card-desc">Off-white rib-knit beanie with fold-over cuff and embroidered Mondelez International wordmark in brand purple. One-size winter staple for field teams and gifting.</p>
+          <div class="card-actions">
+            <a href="#detail-beanie" class="btn btn-primary" onclick="showDetail('detail-beanie')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/mens dress shirt black.jpg" alt="Men's black Mondelez International dress shirt">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Men's Branded Dress Shirt</h3>
+          <p class="sku">SKU: MDZ-SHT-DRS-003</p>
+          <p class="card-desc">Slim-fit black long-sleeve shirt with point collar and white Mondelez International chest logo. Stretch cotton blend for trade shows and client-facing roles.</p>
+          <div class="card-actions">
+            <a href="#detail-dress-shirt" class="btn btn-primary" onclick="showDetail('detail-dress-shirt')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/Silk Shirt With scarf b V2.jpg" alt="Women's purple satin blouse with Mondelez silk scarf">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Executive Satin Blouse &amp; Silk Scarf Set</h3>
+          <p class="sku">SKU: MDZ-BLS-SLK-004</p>
+          <p class="card-desc">Royal purple satin button-down with gold-tone cuff buttons, paired with a 90cm square silk twill scarf in brand purple, black, and white.</p>
+          <div class="card-actions">
+            <a href="#detail-satin-blouse" class="btn btn-primary" onclick="showDetail('detail-satin-blouse')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/Water Repellent Padded Jacket.jpg" alt="Mondelez color-block track jacket with cap and pants">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Color-Block Track Jacket</h3>
+          <p class="sku">SKU: MDZ-JKT-TRK-005</p>
+          <p class="card-desc">Water-repellent polyester track jacket with purple, black, and white panels. Matching cap and track pants available as coordinated SKUs.</p>
+          <div class="card-actions">
+            <a href="#detail-track-jacket" class="btn btn-primary" onclick="showDetail('detail-track-jacket')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="photos/Womens Puffer Jacket.jpg" alt="Women's Mondelez lightweight puffer jacket">
+        </div>
+        <div class="card-body">
+          <span class="brand-tag">Mondelez International</span>
+          <h3>Women's Lightweight Puffer Jacket</h3>
+          <p class="sku">SKU: MDZ-JKT-PFF-006</p>
+          <p class="card-desc">Quilted black body with purple hood, sleeves, and side panels. Branded zipper pulls and left-chest logo. Hip-length transitional outerwear.</p>
+          <div class="card-actions">
+            <a href="#detail-puffer-jacket" class="btn btn-primary" onclick="showDetail('detail-puffer-jacket')">View Details</a>
+            <a href="#" class="btn btn-secondary">Quote</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: WAVE TEE -->
+<div class="detail-wrap" id="detail-wave-tee">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Wave Unisex Tee</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/1 unisex tee.jpg" alt="Mondelez Wave Unisex Tee in white and purple colorways">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Wave Unisex Tee (Two Colorways)</h2>
+        <p class="sku">SKU: MDZ-TEE-WAVE-001</p>
+        <p class="lead">Heavyweight combed cotton jersey tee with a bold diagonal wave color block and stylized M chest mark. Offered in inverse white/purple and purple/white colorways. Relaxed drop-shoulder fit for campus programs, onboarding kits, and field activations.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>100 to 249</td><td class="price-cell">$16.80</td><td>From $1,680</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$14.20</td><td>From $3,550</td></tr>
+              <tr><td>500 to 999</td><td class="price-cell">$11.75</td><td>From $5,875</td></tr>
+              <tr><td>1,000+</td><td class="price-cell">$9.40</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Material</dt><dd>100% combed cotton jersey, 260gsm pre-shrunk</dd>
+        <dt>Colorways</dt><dd>White/Purple (MDZ-TEE-WAVE-001W) and Purple/White (MDZ-TEE-WAVE-001P)</dd>
+        <dt>Fit</dt><dd>Unisex relaxed fit, drop shoulder, ribbed crew neck</dd>
+        <dt>Size range</dt><dd>XS to 3XL (size chart available on request)</dd>
+        <dt>Logo decoration</dt><dd>Screen print M mark on left chest; wave panel in Pantone 268 C purple</dd>
+        <dt>Logo sizing</dt><dd>Chest M mark: 45mm wide. Wave panel: full garment coverage, diagonal sweep</dd>
+        <dt>Packaging</dt><dd>Individual polybag with size sticker, 25 units per master carton</dd>
+        <dt>Production lead time</dt><dd>6 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Cotton sourced from BCI (Better Cotton Initiative) member farms. Dyes are OEKO-TEX Standard 100 certified. Polybags are 30% post-consumer recycled LDPE. Manufactured at our SEDEX-audited facility in Jiangsu.</p>
+      <div class="badges">
+        <span class="badge">BCI Cotton</span>
+        <span class="badge">OEKO-TEX Standard 100</span>
+        <span class="badge">SEDEX 4-Pillar Audit</span>
+        <span class="badge">30% Recycled Polybags</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: BEANIE -->
+<div class="detail-wrap" id="detail-beanie">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Ribbed Beanie</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/Beanie.jpg" alt="Mondelez International ribbed beanie in off-white">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Ribbed Cuff Beanie</h2>
+        <p class="sku">SKU: MDZ-BNI-RIB-002</p>
+        <p class="lead">Off-white vertical rib-knit beanie with a fold-over cuff and embroidered Mondelez International wordmark in brand purple. Soft-touch acrylic blend designed for cold-weather field teams, warehouse staff, and employee gifting programs.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>100 to 249</td><td class="price-cell">$11.50</td><td>From $1,150</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$9.80</td><td>From $2,450</td></tr>
+              <tr><td>500 to 999</td><td class="price-cell">$8.25</td><td>From $4,125</td></tr>
+              <tr><td>1,000+</td><td class="price-cell">$6.90</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Material</dt><dd>100% soft-touch acrylic, 1x1 rib knit, 280gsm</dd>
+        <dt>Color</dt><dd>Off-white / pale grey (Pantone Cool Gray 1 C)</dd>
+        <dt>Dimensions</dt><dd>22cm laid flat width x 24cm height (unfolded). Cuff fold: 7cm</dd>
+        <dt>Weight</dt><dd>85g per unit</dd>
+        <dt>Logo decoration</dt><dd>Direct embroidery, 6 thread colours, Mondelez International wordmark</dd>
+        <dt>Logo sizing</dt><dd>Wordmark: 65mm wide centred on front cuff</dd>
+        <dt>Fit</dt><dd>One size fits most (52 to 62cm head circumference)</dd>
+        <dt>Packaging</dt><dd>Individual polybag, 50 units per master carton</dd>
+        <dt>Production lead time</dt><dd>6 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Acrylic yarn incorporates 30% recycled content from post-industrial textile waste. Embroidery thread is GRS-certified recycled polyester. Hangtags printed on FSC recycled card stock with soy-based inks.</p>
+      <div class="badges">
+        <span class="badge">30% Recycled Yarn</span>
+        <span class="badge">GRS Certified Thread</span>
+        <span class="badge">FSC Recycled Hangtag</span>
+        <span class="badge">SEDEX Audit</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: DRESS SHIRT -->
+<div class="detail-wrap" id="detail-dress-shirt">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Men's Dress Shirt</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/mens dress shirt black.jpg" alt="Men's black Mondelez International dress shirt">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Men's Branded Dress Shirt</h2>
+        <p class="sku">SKU: MDZ-SHT-DRS-003</p>
+        <p class="lead">Slim-fit black long-sleeve dress shirt with point collar, full front placket, and white Mondelez International chest logo. Stretch cotton blend resists wrinkles for trade shows, client meetings, and leadership events.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>100 to 249</td><td class="price-cell">$38.50</td><td>From $3,850</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$32.80</td><td>From $8,200</td></tr>
+              <tr><td>500 to 999</td><td class="price-cell">$27.60</td><td>From $13,800</td></tr>
+              <tr><td>1,000+</td><td class="price-cell">$23.40</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Material</dt><dd>95% cotton, 5% spandex poplin, 130gsm, wrinkle-resistant finish</dd>
+        <dt>Color</dt><dd>Matte black (Pantone Black 6 C)</dd>
+        <dt>Fit</dt><dd>Slim fit with shaped side seams and back yoke</dd>
+        <dt>Size range</dt><dd>Neck 14.5 to 18.5, sleeve 32/33 to 36/37</dd>
+        <dt>Logo decoration</dt><dd>Heat-transfer vinyl, white Mondelez International wordmark on left chest</dd>
+        <dt>Logo sizing</dt><dd>Wordmark: 80mm wide x 18mm tall on chest</dd>
+        <dt>Closure</dt><dd>7-button front placket, matching black buttons, adjustable barrel cuffs</dd>
+        <dt>Packaging</dt><dd>On hanger with collar insert, 20 units per master carton</dd>
+        <dt>Production lead time</dt><dd>8 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Cotton is BCI-sourced. Wrinkle-resistant finish is formaldehyde-free and OEKO-TEX certified. Hanger is 100% recycled PET. Shirt polybags use 40% post-consumer recycled LDPE.</p>
+      <div class="badges">
+        <span class="badge">BCI Cotton</span>
+        <span class="badge">OEKO-TEX Certified Finish</span>
+        <span class="badge">Recycled PET Hangers</span>
+        <span class="badge">SEDEX 4-Pillar Audit</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: SATIN BLOUSE -->
+<div class="detail-wrap" id="detail-satin-blouse">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Satin Blouse &amp; Scarf</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/Silk Shirt With scarf b V2.jpg" alt="Women's purple satin blouse with Mondelez silk scarf">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Executive Satin Blouse &amp; Silk Scarf Set</h2>
+        <p class="sku">SKU: MDZ-BLS-SLK-004</p>
+        <p class="lead">Royal purple satin button-down blouse with gold-tone cuff buttons and left-chest logo, bundled with a 90cm square silk twill scarf in brand purple, black, and white geometric pattern. Tailored for executive events and leadership conferences.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>100 to 249</td><td class="price-cell">$62.00</td><td>From $6,200</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$52.50</td><td>From $13,125</td></tr>
+              <tr><td>500 to 999</td><td class="price-cell">$44.80</td><td>From $22,400</td></tr>
+              <tr><td>1,000+</td><td class="price-cell">$38.20</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Blouse material</dt><dd>70% polyester, 30% silk satin, 110gsm, high-sheen finish</dd>
+        <dt>Scarf material</dt><dd>100% silk twill, 14 momme, hand-rolled edges</dd>
+        <dt>Blouse color</dt><dd>Royal purple (Pantone 268 C)</dd>
+        <dt>Scarf dimensions</dt><dd>900mm x 900mm square</dd>
+        <dt>Blouse fit</dt><dd>Women's tailored slim fit, classic point collar, long sleeve</dd>
+        <dt>Size range</dt><dd>Blouse: XS to 2XL. Scarf: one size</dd>
+        <dt>Logo decoration</dt><dd>Blouse: white chest print. Scarf: all-over digital print with Mondelez International centre motif</dd>
+        <dt>Logo sizing</dt><dd>Blouse chest mark: 55mm wide. Scarf centre logo: 120mm wide</dd>
+        <dt>Packaging</dt><dd>Blouse on hanger, scarf in branded gift box, 10 sets per master carton</dd>
+        <dt>Production lead time</dt><dd>10 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Silk is sourced from RWS (Responsible Wool Standard) affiliated supply chain partners. Satin polyester component uses 25% recycled PET. Scarf gift box is FSC-certified rigid board with soy-based inks. Digital print process uses zero water.</p>
+      <div class="badges">
+        <span class="badge">25% Recycled Polyester</span>
+        <span class="badge">FSC Gift Box</span>
+        <span class="badge">Zero-Water Print</span>
+        <span class="badge">SEDEX Audit</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: TRACK JACKET -->
+<div class="detail-wrap" id="detail-track-jacket">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Track Jacket</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/Water Repellent Padded Jacket.jpg" alt="Mondelez color-block track jacket with cap and pants">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Color-Block Track Jacket</h2>
+        <p class="sku">SKU: MDZ-JKT-TRK-005</p>
+        <p class="lead">Water-repellent full-zip track jacket with purple, black, and white geometric panels, standing collar, and ribbed cuffs and hem. Matching baseball cap (MDZ-CAP-TRK-005) and track pants (MDZ-PNT-TRK-005) available as coordinated SKUs.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>50 to 99</td><td class="price-cell">$58.00</td><td>From $2,900</td></tr>
+              <tr><td>100 to 249</td><td class="price-cell">$49.50</td><td>From $4,950</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$42.20</td><td>From $10,550</td></tr>
+              <tr><td>500+</td><td class="price-cell">$36.80</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Material</dt><dd>100% polyester microfibre shell with DWR coating, mesh lining</dd>
+        <dt>Water repellency</dt><dd>600mm hydrostatic head, spray test rated</dd>
+        <dt>Color blocking</dt><dd>Black body, purple centre zip panel, white side panels with purple accents</dd>
+        <dt>Fit</dt><dd>Unisex athletic fit, standing collar, full-length YKK zip</dd>
+        <dt>Size range</dt><dd>XS to 2XL</dd>
+        <dt>Features</dt><dd>Two side-seam zip pockets, one upper-arm zip pocket, ribbed cuffs and hem</dd>
+        <dt>Logo decoration</dt><dd>White heat-transfer Mondelez International wordmark on left chest</dd>
+        <dt>Logo sizing</dt><dd>Chest wordmark: 75mm wide</dd>
+        <dt>Packaging</dt><dd>Individual polybag, 15 units per master carton</dd>
+        <dt>Production lead time</dt><dd>8 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Shell fabric contains 40% recycled polyester from post-consumer bottles. DWR finish is PFC-free (C0 chemistry). Mesh lining is 100% recycled PET. Manufactured at our SEDEX-audited facility in Fujian.</p>
+      <div class="badges">
+        <span class="badge">40% Recycled Shell</span>
+        <span class="badge">PFC-Free DWR</span>
+        <span class="badge">100% rPET Lining</span>
+        <span class="badge">SEDEX 4-Pillar Audit</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL: PUFFER JACKET -->
+<div class="detail-wrap" id="detail-puffer-jacket">
+  <main>
+    <p class="breadcrumb"><a href="#" onclick="showList()">&larr; Back to Catalog</a> / Mondelez International / Puffer Jacket</p>
+
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img src="photos/Womens Puffer Jacket.jpg" alt="Women's Mondelez lightweight puffer jacket">
+      </div>
+      <div class="detail-info">
+        <span class="brand-tag">Mondelez International</span>
+        <h2>Women's Lightweight Puffer Jacket</h2>
+        <p class="sku">SKU: MDZ-JKT-PFF-006</p>
+        <p class="lead">Quilted hip-length puffer with black body panels and purple hood, shoulders, sleeves, and side accents. Branded white zipper pulls and left-chest Mondelez International logo. Lightweight synthetic fill for transitional weather and travel.</p>
+
+        <div class="pricing">
+          <h3>Pricing Tiers <span class="currency-note">CAD</span></h3>
+          <table>
+            <thead>
+              <tr><th>Quantity</th><th>Unit Price</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>50 to 99</td><td class="price-cell">$68.00</td><td>From $3,400</td></tr>
+              <tr><td>100 to 249</td><td class="price-cell">$57.50</td><td>From $5,750</td></tr>
+              <tr><td>250 to 499</td><td class="price-cell">$48.90</td><td>From $12,225</td></tr>
+              <tr><td>500+</td><td class="price-cell">$41.60</td><td>Contact for quote</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <a href="#" class="btn btn-primary">Request Quote</a>
+        <a href="#" class="btn btn-secondary">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>Product Specifications</h3>
+      <dl>
+        <dt>Material</dt><dd>Outer: 100% nylon with DWR finish. Fill: 100% recycled polyester fibre (120gsm)</dd>
+        <dt>Color blocking</dt><dd>Black quilted body, purple hood/sleeves/side panels/hem binding</dd>
+        <dt>Fit</dt><dd>Women's slim athletic fit, hip length with integrated hood</dd>
+        <dt>Size range</dt><dd>XS to 2XL</dd>
+        <dt>Dimensions (size M)</dt><dd>Centre back length: 650mm. Chest: 520mm laid flat</dd>
+        <dt>Weight</dt><dd>380g per unit (size M)</dd>
+        <dt>Features</dt><dd>Full-length front zip, two zip hand pockets, elastic-bound cuffs and hem, branded zip pulls</dd>
+        <dt>Logo decoration</dt><dd>White left-chest print, Mondelez International wordmark on zip pull tabs</dd>
+        <dt>Logo sizing</dt><dd>Chest wordmark: 70mm wide</dd>
+        <dt>Packaging</dt><dd>Compressible into individual polybag, 12 units per master carton</dd>
+        <dt>Production lead time</dt><dd>10 weeks post art approval</dd>
+      </dl>
+    </div>
+
+    <div class="sustainability">
+      <h3>Sustainability Information</h3>
+      <p>Insulation is 100% recycled PET, equivalent to approximately 8 reclaimed plastic bottles per jacket. Outer nylon incorporates 30% recycled content. DWR coating is PFC-free. Compressible pack format reduces shipping volume by approximately 45%.</p>
+      <div class="badges">
+        <span class="badge">100% Recycled Fill</span>
+        <span class="badge">30% Recycled Nylon</span>
+        <span class="badge">PFC-Free DWR</span>
+        <span class="badge">GRS Certified</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Billboard Agency International</strong><br>
+      Wholesale distribution partner for Mondelez International corporate apparel
+    </div>
+    <div>
+      <a href="#">Terms of Sale</a> &nbsp;|&nbsp;
+      <a href="#">Art Approval Process</a> &nbsp;|&nbsp;
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showDetail(id) {
+    document.getElementById('listView').classList.add('hidden');
+    document.querySelectorAll('.detail-wrap').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  function showList() {
+    document.getElementById('listView').classList.remove('hidden');
+    document.querySelectorAll('.detail-wrap').forEach(el => el.classList.remove('active'));
+    window.scrollTo(0, 0);
+  }
+
+  // Handle direct hash navigation on load
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash.startsWith('detail-')) {
+      showDetail(hash);
+    }
+  });
+</script>
+
+</body>
+</html>
