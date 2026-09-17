@@ -1,12 +1,13 @@
 /* PCNA-inspired Order Estimator — Mondelez brand */
 
 .order-estimator {
-  margin: 8px 0 0;
+  margin: 0 0 40px;
   max-width: 100%;
-}
-
-.oe-mount {
-  margin-top: 8px;
+  width: 100%;
+  clear: both;
+  /* Prevent wide table from expanding parent layouts */
+  min-width: 0;
+  overflow: hidden;
 }
 
 .oe-card {
@@ -15,6 +16,21 @@
   background: var(--white);
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(80, 33, 114, 0.06);
+  max-width: 100%;
+}
+
+.oe-table-wrap {
+  padding: 8px 24px 20px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.oe-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  max-width: 100%;
 }
 
 .oe-header {
@@ -129,10 +145,6 @@
   margin: 0;
 }
 
-.oe-table-wrap {
-  padding: 8px 24px 20px;
-}
-
 .oe-placeholder {
   font-size: 14px;
   color: var(--ink-soft);
@@ -155,12 +167,6 @@
   25% { content: '.'; }
   50% { content: '..'; }
   75% { content: '...'; }
-}
-
-.oe-scroll {
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 6px;
 }
 
 .oe-table {

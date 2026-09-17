@@ -257,9 +257,23 @@
 
   .detail-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1fr);
     gap: 48px;
     margin-bottom: 48px;
+    align-items: start;
+  }
+  .detail-grid > * {
+    min-width: 0;
+  }
+  .detail-image {
+    width: 100%;
+    max-width: 100%;
+  }
+  .detail-image img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
   }
   @media (max-width: 768px) {
     .detail-grid { grid-template-columns: 1fr; gap: 24px; }

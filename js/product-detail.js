@@ -344,8 +344,7 @@
     var qty = grandTotal();
     return (
       renderSwatches(product) +
-      renderPricingTable(product, qty) +
-      '<div id="oe-mount" class="oe-mount" aria-live="polite"></div>'
+      renderPricingTable(product, qty)
     );
   }
 

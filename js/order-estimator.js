@@ -149,31 +149,31 @@
   }
 
   function ensureEstimator(detailEl) {
-    // Prefer the mount inside the PDP order panel (replaces Order Quantities)
-    var mount = detailEl.querySelector('#oe-mount');
-    if (mount) {
-      var existing = mount.querySelector('.order-estimator');
-      if (existing) return existing;
-      var wrap = document.createElement('section');
-      wrap.className = 'order-estimator';
-      wrap.setAttribute('aria-label', 'Order Estimator');
-      mount.appendChild(wrap);
-      return wrap;
-    }
+    var existing = detailEl.querySelector('.order-estimator');
+    if (existing) return existing;
 
-    var existingOuter = detailEl.querySelector('.order-estimator');
-    if (existingOuter) return existingOuter;
+    var wrap = document.createElement('section');
+    wrap.className = 'order-estimator';
+    wrap.setAttribute('aria-label', 'Order Estimator');
 
-    var wrapOuter = document.createElement('section');
-    wrapOuter.className = 'order-estimator';
-    wrapOuter.setAttribute('aria-label', 'Order Estimator');
-    var infoBlock = detailEl.querySelector('.info-block');
-    if (infoBlock) {
-      infoBlock.parentNode.insertBefore(wrapOuter, infoBlock);
+    // Full-width below the 2-col detail grid so the results table
+    // never collapses the product image column.
+    var grid = detailEl.querySelector('.detail-grid');
+    if (grid && grid.parentNode) {
+      if (grid.nextSibling) {
+        grid.parentNode.insertBefore(wrap, grid.nextSibling);
+      } else {
+        grid.parentNode.appendChild(wrap);
+      }
     } else {
-      (detailEl.querySelector('main') || detailEl).appendChild(wrapOuter);
+      var infoBlock = detailEl.querySelector('.info-block');
+      if (infoBlock) {
+        infoBlock.parentNode.insertBefore(wrap, infoBlock);
+      } else {
+        (detailEl.querySelector('main') || detailEl).appendChild(wrap);
+      }
     }
-    return wrapOuter;
+    return wrap;
   }
 
   function renderShell(product) {
