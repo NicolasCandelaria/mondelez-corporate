@@ -276,12 +276,35 @@
 @media (max-width: 768px) {
   .oe-header {
     flex-direction: column;
+    padding: 16px;
   }
+  .oe-title { font-size: 18px; }
   .oe-controls {
     flex-direction: column;
     align-items: stretch;
+    padding: 16px;
+  }
+  .oe-field input,
+  .oe-field select {
+    width: 100%;
+    min-height: 44px;
   }
   .oe-calc {
     width: 100%;
+    min-height: 44px;
+  }
+  .oe-product-name,
+  .oe-table-wrap,
+  .oe-disclaimer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .oe-table {
+    min-width: 720px;
+    font-size: 12px;
+  }
+  .pdp-swatch {
+    width: 40px;
+    height: 40px;
   }
 }
