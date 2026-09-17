@@ -1,8 +1,12 @@
 /* PCNA-inspired Order Estimator — Mondelez brand */
 
 .order-estimator {
-  margin: 32px 0 40px;
-  max-width: 1200px;
+  margin: 8px 0 0;
+  max-width: 100%;
+}
+
+.oe-mount {
+  margin-top: 8px;
 }
 
 .oe-card {

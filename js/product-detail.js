@@ -345,11 +345,7 @@
     return (
       renderSwatches(product) +
       renderPricingTable(product, qty) +
-      renderQtyGrid(product) +
-      renderTotals(product, qty) +
-      '<div class="pdp-actions">' +
-      '<button type="button" class="btn btn-primary" data-pdp-add-quote>Add to Quote</button>' +
-      '</div>'
+      '<div id="oe-mount" class="oe-mount" aria-live="polite"></div>'
     );
   }
 

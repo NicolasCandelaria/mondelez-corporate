@@ -149,22 +149,31 @@
   }
 
   function ensureEstimator(detailEl) {
-    var main = detailEl.querySelector('main') || detailEl;
-    var existing = detailEl.querySelector('.order-estimator');
-    if (existing) return existing;
+    // Prefer the mount inside the PDP order panel (replaces Order Quantities)
+    var mount = detailEl.querySelector('#oe-mount');
+    if (mount) {
+      var existing = mount.querySelector('.order-estimator');
+      if (existing) return existing;
+      var wrap = document.createElement('section');
+      wrap.className = 'order-estimator';
+      wrap.setAttribute('aria-label', 'Order Estimator');
+      mount.appendChild(wrap);
+      return wrap;
+    }
 
-    var wrap = document.createElement('section');
-    wrap.className = 'order-estimator';
-    wrap.setAttribute('aria-label', 'Order Estimator');
+    var existingOuter = detailEl.querySelector('.order-estimator');
+    if (existingOuter) return existingOuter;
 
-    // Place after the detail-grid / specs block
+    var wrapOuter = document.createElement('section');
+    wrapOuter.className = 'order-estimator';
+    wrapOuter.setAttribute('aria-label', 'Order Estimator');
     var infoBlock = detailEl.querySelector('.info-block');
     if (infoBlock) {
-      infoBlock.parentNode.insertBefore(wrap, infoBlock);
+      infoBlock.parentNode.insertBefore(wrapOuter, infoBlock);
     } else {
-      main.appendChild(wrap);
+      (detailEl.querySelector('main') || detailEl).appendChild(wrapOuter);
     }
-    return wrap;
+    return wrapOuter;
   }
 
   function renderShell(product) {
