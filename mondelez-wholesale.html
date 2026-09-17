@@ -25,6 +25,7 @@
     background: var(--white);
     line-height: 1.6;
     font-size: 16px;
+    overflow-x: clip;
   }
 
   a { color: var(--brand-purple); text-decoration: underline; text-underline-offset: 3px; }
@@ -305,9 +306,12 @@
     margin-bottom: 24px;
   }
 
-  /* Pricing table */
+  /* Pricing table — contain horizontal scroll on mobile */
   .pricing {
     margin-bottom: 32px;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .pricing h3 {
     font-size: 16px;
@@ -560,7 +564,23 @@
   .page-header p { color: var(--ink-soft); font-size: 15px; }
 
   /* Data tables */
-  .data-table-wrap { overflow-x: auto; margin-bottom: 24px; }
+  .data-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 24px;
+    max-width: 100%;
+    position: relative;
+  }
+  .data-table-wrap::after {
+    content: "Swipe for more →";
+    display: none;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 6px 0 0;
+  }
   .data-table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); }
   .data-table th, .data-table td {
     padding: 12px 16px;
@@ -859,6 +879,15 @@
       border-color: var(--brand-purple);
     }
     #category-filters .filter-count { color: inherit; opacity: 0.85; }
+    .mobile-filter-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -866,27 +895,39 @@
 
     header { padding: 12px 16px; }
     .header-inner {
-      flex-direction: column;
-      align-items: stretch;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "brand cart"
+        "search search"
+        "nav nav";
+      align-items: center;
       gap: 12px;
     }
-    .brand { font-size: 16px; }
+    .brand { grid-area: brand; font-size: 16px; min-width: 0; }
     .brand small { font-size: 11px; }
     .header-search {
+      grid-area: search;
       max-width: none;
       min-width: 0;
       width: 100%;
-      order: 2;
     }
+    .header-search input,
+    .header-search button { min-height: 44px; }
     .cart-link {
-      order: 1;
-      align-self: flex-end;
+      grid-area: cart;
       padding: 8px 0;
       min-height: 44px;
       display: inline-flex;
       align-items: center;
+      justify-content: flex-end;
     }
-    nav { order: 3; width: 100%; }
+    nav {
+      grid-area: nav;
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 4px;
+    }
     nav ul {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -931,6 +972,11 @@
       box-sizing: border-box;
     }
 
+    .detail-wrap,
+    .page-wrap {
+      max-width: 100%;
+      overflow-x: clip;
+    }
     .detail-wrap > main,
     .page-wrap > main { padding-left: 16px; padding-right: 16px; }
 
@@ -956,10 +1002,33 @@
       margin-right: -16px;
       padding: 0 16px;
     }
+    .data-table-wrap::after { display: block; }
     .data-table th,
     .data-table td {
       padding: 10px 12px;
       font-size: 13px;
+    }
+    .data-table th:first-child,
+    .data-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background: var(--white);
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+    }
+    .data-table thead th:first-child {
+      background: var(--bg-soft);
+      z-index: 2;
+    }
+    .data-table tbody tr:nth-child(even) td:first-child {
+      background: var(--bg-soft);
+    }
+    .data-table tbody tr:hover td:first-child {
+      background: #faf8fc;
+    }
+
+    .pricing table {
+      min-width: 280px;
     }
 
     footer { padding: 28px 16px; }
@@ -976,6 +1045,8 @@
 
     .quote-summary { padding: 16px; }
   }
+
+  .mobile-filter-label { display: none; }
 
   @media (max-width: 480px) {
     .card-image { height: 240px; }
@@ -1046,14 +1117,15 @@
 
   <div class="catalog-layout">
     <aside class="sidebar" aria-label="Catalog filters">
+      <p class="mobile-filter-label">Filter by category</p>
       <h3>Categories</h3>
       <ul id="category-filters">
-        <li><a href="#catalog" class="active" data-category="all" onclick="showPage('catalog')">All Styles <span class="filter-count">0</span></a></li>
-        <li><a href="#catalog" data-category="tees" onclick="showPage('catalog')">T-Shirts &amp; Tops <span class="filter-count">0</span></a></li>
-        <li><a href="#catalog" data-category="woven" onclick="showPage('catalog')">Woven &amp; Dress Shirts <span class="filter-count">0</span></a></li>
-        <li><a href="#catalog" data-category="outerwear" onclick="showPage('catalog')">Outerwear <span class="filter-count">0</span></a></li>
-        <li><a href="#catalog" data-category="headwear" onclick="showPage('catalog')">Headwear <span class="filter-count">0</span></a></li>
-        <li><a href="#catalog" data-category="accessories" onclick="showPage('catalog')">Accessories <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" class="active" data-category="all">All Styles <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="tees">T-Shirts &amp; Tops <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="woven">Woven &amp; Dress Shirts <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="outerwear">Outerwear <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="headwear">Headwear <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="accessories">Accessories <span class="filter-count">0</span></a></li>
       </ul>
       <h3 style="margin-top:24px;">Decoration</h3>
       <ul>
@@ -2095,11 +2167,13 @@
       filterRoot.addEventListener('click', function (event) {
         const link = event.target.closest('a[data-category]');
         if (!link) return;
+        event.preventDefault();
         const cat = link.getAttribute('data-category');
         if (!cat) return;
         catalogState.category = cat;
         setActiveCategoryLink(cat);
         renderCatalog();
+        if (typeof showPage === 'function') showPage('catalog');
       });
     }
 

@@ -33,6 +33,24 @@
   max-width: 100%;
 }
 
+.oe-scroll-hint {
+  display: none;
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.oe-table th:first-child,
+.oe-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--white);
+}
+
 .oe-header {
   display: flex;
   justify-content: space-between;
@@ -299,12 +317,37 @@
     padding-left: 16px;
     padding-right: 16px;
   }
+  .oe-scroll-hint { display: block; }
   .oe-table {
     min-width: 720px;
     font-size: 12px;
   }
+  .oe-table thead th:first-child {
+    background: var(--brand-purple);
+    z-index: 2;
+  }
+  .oe-table tbody tr:nth-child(even) td:first-child {
+    background: var(--bg-soft);
+  }
+  .oe-table tbody tr:hover td:first-child {
+    background: rgba(80, 33, 114, 0.06);
+  }
+  .oe-deco-name {
+    min-width: 140px;
+    max-width: 160px;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+  }
+  .oe-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .oe-actions .btn {
+    width: 100%;
+    text-align: center;
+    min-height: 44px;
+  }
   .pdp-swatch {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 }

@@ -288,6 +288,8 @@
       : '—';
 
     return (
+      '<div class="oe-scroll-shell">' +
+      '<p class="oe-scroll-hint" aria-hidden="true">Swipe table for more columns →</p>' +
       '<div class="oe-scroll">' +
       '<table class="oe-table">' +
       '<thead><tr>' +
@@ -302,7 +304,7 @@
       '</tr></thead>' +
       '<tbody>' +
       rows +
-      '</tbody></table></div>' +
+      '</tbody></table></div></div>' +
       '<div class="oe-summary">' +
       '<strong>Qty:</strong> ' +
       qty.toLocaleString('en-US') +

@@ -36,6 +36,18 @@
   background: #ccc;
 }
 
+@media (max-width: 768px) {
+  .pdp-swatch {
+    width: 44px;
+    height: 44px;
+  }
+  .pdp-pricing {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 .pdp-swatch:hover {
   transform: scale(1.06);
 }
