@@ -1,0 +1,277 @@
+/* PCNA-inspired Order Estimator — Mondelez brand */
+
+.order-estimator {
+  margin: 32px 0 40px;
+  max-width: 1200px;
+}
+
+.oe-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(80, 33, 114, 0.06);
+}
+
+.oe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 3px solid var(--brand-purple);
+  background: linear-gradient(180deg, #faf8fc 0%, #fff 100%);
+}
+
+.oe-title {
+  font-size: 22px;
+  color: var(--brand-purple);
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.oe-sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 720px;
+  line-height: 1.45;
+}
+
+.oe-coded-badge {
+  flex-shrink: 0;
+  background: var(--brand-purple);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.oe-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px 18px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  background: #fbfafc;
+}
+
+.oe-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+.oe-field em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+.oe-field input,
+.oe-field select {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  min-width: 100px;
+  font-family: inherit;
+}
+
+.oe-field input:focus,
+.oe-field select:focus {
+  outline: 2px solid var(--brand-purple);
+  border-color: var(--brand-purple);
+}
+
+.oe-postal {
+  min-width: 180px;
+}
+
+.oe-postal small {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.oe-calc {
+  align-self: flex-end;
+  min-width: 120px;
+}
+
+.oe-product-name {
+  padding: 14px 24px 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+.oe-table-wrap {
+  padding: 8px 24px 20px;
+}
+
+.oe-placeholder {
+  font-size: 14px;
+  color: var(--ink-soft);
+  padding: 28px 12px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  background: var(--bg-soft);
+}
+
+.oe-loading::after {
+  content: '';
+  display: inline-block;
+  width: 0.8em;
+  animation: oe-dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes oe-dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+.oe-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.oe-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 960px;
+  font-size: 13px;
+}
+
+.oe-table th {
+  background: var(--brand-purple);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 12px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.oe-table th .oe-code {
+  opacity: 0.85;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.oe-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--ink);
+}
+
+.oe-table tbody tr:nth-child(even) {
+  background: var(--bg-soft);
+}
+
+.oe-table tbody tr:hover {
+  background: rgba(80, 33, 114, 0.06);
+}
+
+.oe-deco-name {
+  font-weight: 600;
+  color: var(--brand-purple);
+  min-width: 180px;
+}
+
+.oe-cell-note {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+.oe-subtotal {
+  font-weight: 700;
+  color: var(--brand-purple);
+  white-space: nowrap;
+}
+
+.oe-notes {
+  font-size: 12px;
+  color: var(--ink-soft);
+  max-width: 220px;
+  line-height: 1.35;
+}
+
+.oe-summary {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 10px 0;
+}
+
+.oe-freight-msg {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.oe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.oe-pricing-note {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+.oe-disclaimer {
+  padding: 0 24px 18px;
+  font-size: 12px;
+  margin: 0;
+}
+
+.oe-disclaimer a {
+  color: var(--brand-purple);
+}
+
+@media (max-width: 768px) {
+  .oe-header {
+    flex-direction: column;
+  }
+  .oe-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .oe-calc {
+    width: 100%;
+  }
+}
