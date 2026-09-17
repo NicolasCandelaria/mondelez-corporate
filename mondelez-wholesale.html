@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mondelez Corporate Apparel Portal | Billboard Agency International</title>
+<link rel="stylesheet" href="css/pdp.css">
 <style>
   :root {
     --brand-purple: #502172;
@@ -759,6 +760,29 @@
     border-bottom: none;
     padding-top: 12px;
   }
+  .quote-empty {
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .quote-empty[hidden] { display: none; }
+  #page-quick-order tr.sku-invalid td { background: #fde8e8; }
+  #page-quick-order tr.sku-invalid input { border-color: var(--brand-red) !important; }
+  #page-quick-order .qo-msg {
+    color: var(--brand-red);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  #quick-order-message {
+    color: var(--brand-red);
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+  #quick-order-message[hidden] { display: none; }
 
   .toolbar {
     display: flex;
@@ -805,12 +829,12 @@
       <small>Distributed by Billboard Agency International</small>
     </div>
     <div class="header-search">
-      <form onsubmit="event.preventDefault(); alert('Search is a prototype feature. Use category filters to browse.');">
-        <input type="search" placeholder="Search by style, SKU, or keyword..." aria-label="Search catalog">
+      <form id="catalog-search-form" onsubmit="event.preventDefault();">
+        <input type="search" id="catalog-search-input" placeholder="Search by style, SKU, or keyword..." aria-label="Search catalog">
         <button type="submit">Search</button>
       </form>
     </div>
-    <a href="#quote" class="cart-link" onclick="showPage('quote')">Quote Cart <span class="cart-badge">2</span></a>
+    <a href="#quote" class="cart-link" onclick="showPage('quote')">Quote Cart <span class="cart-badge">0</span></a>
     <nav aria-label="Primary">
       <ul>
         <li><a href="#catalog" data-nav="catalog" class="active" onclick="showPage('catalog')">Catalog</a></li>
@@ -840,13 +864,13 @@
   <div class="catalog-layout">
     <aside class="sidebar" aria-label="Catalog filters">
       <h3>Categories</h3>
-      <ul>
-        <li><a href="#catalog" class="active" onclick="showPage('catalog')">All Styles <span class="filter-count">6</span></a></li>
-        <li><a href="#catalog" onclick="showPage('catalog')">T-Shirts &amp; Tops <span class="filter-count">2</span></a></li>
-        <li><a href="#catalog" onclick="showPage('catalog')">Woven &amp; Dress Shirts <span class="filter-count">2</span></a></li>
-        <li><a href="#catalog" onclick="showPage('catalog')">Outerwear <span class="filter-count">2</span></a></li>
-        <li><a href="#catalog" onclick="showPage('catalog')">Headwear <span class="filter-count">1</span></a></li>
-        <li><a href="#catalog" onclick="showPage('catalog')">Accessories <span class="filter-count">1</span></a></li>
+      <ul id="category-filters">
+        <li><a href="#catalog" class="active" data-category="all" onclick="showPage('catalog')">All Styles <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="tees" onclick="showPage('catalog')">T-Shirts &amp; Tops <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="woven" onclick="showPage('catalog')">Woven &amp; Dress Shirts <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="outerwear" onclick="showPage('catalog')">Outerwear <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="headwear" onclick="showPage('catalog')">Headwear <span class="filter-count">0</span></a></li>
+        <li><a href="#catalog" data-category="accessories" onclick="showPage('catalog')">Accessories <span class="filter-count">0</span></a></li>
       </ul>
       <h3 style="margin-top:24px;">Decoration</h3>
       <ul>
@@ -865,13 +889,13 @@
 
     <div>
       <div class="toolbar">
-        <span class="result-count">Showing 6 styles</span>
-        <select aria-label="Sort catalog">
-          <option>Sort: Featured</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Lead Time</option>
-          <option>Newest</option>
+        <span class="result-count" id="catalog-result-count">Showing 0 styles</span>
+        <select id="catalog-sort" aria-label="Sort catalog">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="lead">Lead Time</option>
+          <option value="newest">Newest</option>
         </select>
       </div>
 
@@ -879,103 +903,7 @@
         <h2 class="section-title">Corporate Apparel Collection</h2>
         <p class="section-sub">Six core styles for employee programs, leadership events, and field activations. Click any item to view full specs, sizing, pricing tiers, and decoration details.</p>
 
-        <div class="grid">
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/1 unisex tee.jpg" alt="Mondelez Wave Unisex Tee in white and purple colorways">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Wave Unisex Tee (Two Colorways)</h3>
-          <p class="sku">SKU: MDZ-TEE-WAVE-001</p>
-          <p class="card-desc">Heavyweight cotton jersey with diagonal wave color block and stylized M chest mark. Available in white/purple and purple/white. Relaxed unisex fit for campus and event wear.</p>
-          <div class="card-actions">
-            <a href="#detail-wave-tee" class="btn btn-primary" onclick="showDetail('detail-wave-tee')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/Beanie.jpg" alt="Mondelez International ribbed beanie in off-white">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Ribbed Cuff Beanie</h3>
-          <p class="sku">SKU: MDZ-BNI-RIB-002</p>
-          <p class="card-desc">Off-white rib-knit beanie with fold-over cuff and embroidered Mondelez International wordmark in brand purple. One-size winter staple for field teams and gifting.</p>
-          <div class="card-actions">
-            <a href="#detail-beanie" class="btn btn-primary" onclick="showDetail('detail-beanie')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/mens dress shirt black.jpg" alt="Men's black Mondelez International dress shirt">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Men's Branded Dress Shirt</h3>
-          <p class="sku">SKU: MDZ-SHT-DRS-003</p>
-          <p class="card-desc">Slim-fit black long-sleeve shirt with point collar and white Mondelez International chest logo. Stretch cotton blend for trade shows and client-facing roles.</p>
-          <div class="card-actions">
-            <a href="#detail-dress-shirt" class="btn btn-primary" onclick="showDetail('detail-dress-shirt')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/Silk Shirt With scarf b V2.jpg" alt="Women's purple satin blouse with Mondelez silk scarf">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Executive Satin Blouse &amp; Silk Scarf Set</h3>
-          <p class="sku">SKU: MDZ-BLS-SLK-004</p>
-          <p class="card-desc">Royal purple satin button-down with gold-tone cuff buttons, paired with a 90cm square silk twill scarf in brand purple, black, and white.</p>
-          <div class="card-actions">
-            <a href="#detail-satin-blouse" class="btn btn-primary" onclick="showDetail('detail-satin-blouse')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/Water Repellent Padded Jacket.jpg" alt="Mondelez color-block track jacket with cap and pants">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Color-Block Track Jacket</h3>
-          <p class="sku">SKU: MDZ-JKT-TRK-005</p>
-          <p class="card-desc">Water-repellent polyester track jacket with purple, black, and white panels. Matching cap and track pants available as coordinated SKUs.</p>
-          <div class="card-actions">
-            <a href="#detail-track-jacket" class="btn btn-primary" onclick="showDetail('detail-track-jacket')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-image">
-          <img src="photos/Womens Puffer Jacket.jpg" alt="Women's Mondelez lightweight puffer jacket">
-        </div>
-        <div class="card-body">
-          <span class="brand-tag">Mondelez International</span>
-          <h3>Women's Lightweight Puffer Jacket</h3>
-          <p class="sku">SKU: MDZ-JKT-PFF-006</p>
-          <p class="card-desc">Quilted black body with purple hood, sleeves, and side panels. Branded zipper pulls and left-chest logo. Hip-length transitional outerwear.</p>
-          <div class="card-actions">
-            <a href="#detail-puffer-jacket" class="btn btn-primary" onclick="showDetail('detail-puffer-jacket')">View Details</a>
-            <a href="#quote" class="btn btn-secondary" onclick="showPage('quote')">Quote</a>
-          </div>
-        </div>
-      </article>
-    </div>
+        <div class="grid" id="catalog-grid"></div>
       </main>
     </div>
   </div>
@@ -1011,7 +939,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="wave-tee">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1073,7 +1001,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="beanie">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1136,7 +1064,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="dress-shirt">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1199,7 +1127,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="satin-blouse">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1263,7 +1191,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="track-jacket">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1327,7 +1255,7 @@
           </table>
         </div>
 
-        <a href="#quote" class="btn btn-primary" onclick="showPage('quote')">Request Quote</a>
+        <a href="#quote" class="btn btn-primary" data-add-quote="puffer-jacket">Request Quote</a>
         <a href="#art-approval" class="btn btn-secondary" onclick="showPage('art-approval')">Download Spec Sheet</a>
       </div>
     </div>
@@ -1587,37 +1515,25 @@
     </div>
   </div>
   <main>
+    <div id="quote-empty" class="quote-empty" hidden>
+      <p>Your quote cart is empty.</p>
+      <p><a href="#catalog" class="btn btn-primary" onclick="showPage('catalog')">Browse Catalog</a></p>
+    </div>
     <div class="data-table-wrap">
       <table class="data-table">
         <thead>
           <tr><th>SKU</th><th>Product</th><th>Qty</th><th>Est. Unit (USD)</th><th>Est. Total (USD)</th><th></th></tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>MDZ-TEE-WAVE-001</td>
-            <td>Wave Unisex Tee</td>
-            <td><input type="number" value="500" min="100" style="width:80px;padding:6px;"></td>
-            <td>$11.75</td>
-            <td>$5,875.00</td>
-            <td><a href="#">Remove</a></td>
-          </tr>
-          <tr>
-            <td>MDZ-BNI-RIB-002</td>
-            <td>Ribbed Cuff Beanie</td>
-            <td><input type="number" value="250" min="100" style="width:80px;padding:6px;"></td>
-            <td>$9.80</td>
-            <td>$2,450.00</td>
-            <td><a href="#">Remove</a></td>
-          </tr>
+        <tbody id="quote-cart-body">
         </tbody>
       </table>
     </div>
     <div class="quote-summary">
       <h3>Quote Summary</h3>
-      <div class="quote-line"><span>Subtotal (750 units)</span><span>$8,325.00</span></div>
-      <div class="quote-line"><span>Est. Freight (landed to NJ DC)</span><span>$420.00</span></div>
-      <div class="quote-line"><span>Decoration setup (2 SKUs)</span><span>$350.00</span></div>
-      <div class="quote-line total"><span>Estimated Total (USD)</span><span>$9,095.00</span></div>
+      <div class="quote-line"><span>Subtotal (0 units)</span><span>$0.00</span></div>
+      <div class="quote-line"><span>Est. Freight (landed to NJ DC)</span><span>$0.00</span></div>
+      <div class="quote-line"><span>Decoration setup (0 lines)</span><span>$0.00</span></div>
+      <div class="quote-line total"><span>Estimated Total (USD)</span><span>$0.00</span></div>
     </div>
     <form style="margin-top:32px;" onsubmit="event.preventDefault(); alert('Quote request MDZ-Q-2026-0912 submitted. Nicolas Candelaria will respond within 1 business day.');">
       <div class="form-grid">
@@ -1643,14 +1559,27 @@
     </div>
   </div>
   <main>
-    <form onsubmit="event.preventDefault(); alert('Item added to quote cart.'); showPage('quote');">
+    <p id="quick-order-message" hidden></p>
+    <form id="quick-order-form">
       <div class="data-table-wrap">
         <table class="data-table">
           <thead><tr><th>SKU</th><th>Quantity</th><th></th></tr></thead>
           <tbody>
-            <tr><td><input type="text" placeholder="e.g. MDZ-TEE-WAVE-001" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td><input type="number" value="100" min="50" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td></td></tr>
-            <tr><td><input type="text" placeholder="SKU" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td><input type="number" value="100" min="50" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td></td></tr>
-            <tr><td><input type="text" placeholder="SKU" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td><input type="number" value="100" min="50" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td><td></td></tr>
+            <tr>
+              <td><input type="text" class="qo-sku" placeholder="e.g. MDZ-TEE-WAVE-001" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td><input type="number" class="qo-qty" value="100" min="1" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td class="qo-msg"></td>
+            </tr>
+            <tr>
+              <td><input type="text" class="qo-sku" placeholder="SKU" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td><input type="number" class="qo-qty" value="100" min="1" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td class="qo-msg"></td>
+            </tr>
+            <tr>
+              <td><input type="text" class="qo-sku" placeholder="SKU" style="width:100%;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td><input type="number" class="qo-qty" value="100" min="1" style="width:100px;padding:8px;border:1px solid var(--line);border-radius:4px;"></td>
+              <td class="qo-msg"></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1787,6 +1716,7 @@
   <div class="footer-bottom">&copy; 2026 Billboard Agency International. Mondelez International is a registered trademark of Mondelēz Global LLC.</div>
 </footer>
 
+<script src="js/products.js"></script>
 <script>
   const PAGE_MAP = {
     'catalog': 'page-catalog',
@@ -1815,6 +1745,9 @@
     if (navLink) navLink.classList.add('active');
     window.location.hash = page === 'catalog' ? 'catalog' : page;
     window.scrollTo(0, 0);
+    if (page === 'quote' && window.MdzCart && typeof window.MdzCart.render === 'function') {
+      window.MdzCart.render();
+    }
   }
 
   function showDetail(id) {
@@ -1847,9 +1780,180 @@
     }
   }
 
-  window.addEventListener('load', routeFromHash);
+  /* ---- Catalog browse (Tier 1 items 1–6) ---- */
+  const catalogState = {
+    category: 'all',
+    sort: 'featured',
+    query: ''
+  };
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function lowestPrice(product) {
+    if (!product.priceBreaks || !product.priceBreaks.length) return Number.POSITIVE_INFINITY;
+    return Math.min.apply(null, product.priceBreaks.map(function (b) { return b.price; }));
+  }
+
+  function getCategoryDef(id) {
+    return (window.CATEGORIES || []).find(function (c) { return c.id === id; }) || null;
+  }
+
+  function updateCategoryCounts() {
+    const products = window.PRODUCTS || [];
+    document.querySelectorAll('#category-filters a[data-category]').forEach(function (link) {
+      const catId = link.getAttribute('data-category');
+      const def = getCategoryDef(catId);
+      const count = def ? products.filter(function (p) { return def.match(p); }).length : 0;
+      const badge = link.querySelector('.filter-count');
+      if (badge) badge.textContent = String(count);
+    });
+  }
+
+  function setActiveCategoryLink(categoryId) {
+    document.querySelectorAll('#category-filters a[data-category]').forEach(function (link) {
+      link.classList.toggle('active', link.getAttribute('data-category') === categoryId);
+    });
+  }
+
+  function filterProducts() {
+    const products = (window.PRODUCTS || []).slice();
+    const def = getCategoryDef(catalogState.category);
+    const q = catalogState.query.trim().toLowerCase();
+
+    return products.filter(function (product) {
+      if (def && !def.match(product)) return false;
+      if (!q) return true;
+      const haystack = [
+        product.name,
+        product.sku,
+        product.description,
+        product.brand
+      ].join(' ').toLowerCase();
+      return haystack.indexOf(q) !== -1;
+    });
+  }
+
+  function sortProducts(list) {
+    const sorted = list.slice();
+    switch (catalogState.sort) {
+      case 'price-asc':
+        sorted.sort(function (a, b) { return lowestPrice(a) - lowestPrice(b); });
+        break;
+      case 'price-desc':
+        sorted.sort(function (a, b) { return lowestPrice(b) - lowestPrice(a); });
+        break;
+      case 'lead':
+        sorted.sort(function (a, b) { return (a.leadWeeks || 0) - (b.leadWeeks || 0); });
+        break;
+      case 'newest':
+        sorted.sort(function (a, b) {
+          return (b.newest === true ? 1 : 0) - (a.newest === true ? 1 : 0);
+        });
+        break;
+      case 'featured':
+      default:
+        sorted.sort(function (a, b) {
+          return (b.featured === true ? 1 : 0) - (a.featured === true ? 1 : 0);
+        });
+        break;
+    }
+    return sorted;
+  }
+
+  function renderProductCard(product) {
+    const detailId = product.detailId || ('detail-' + product.id);
+    return (
+      '<article class="card" data-product-id="' + escapeHtml(product.id) + '">' +
+        '<div class="card-image">' +
+          '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '">' +
+        '</div>' +
+        '<div class="card-body">' +
+          '<span class="brand-tag">' + escapeHtml(product.brand) + '</span>' +
+          '<h3>' + escapeHtml(product.name) + '</h3>' +
+          '<p class="sku">SKU: ' + escapeHtml(product.sku) + '</p>' +
+          '<p class="card-desc">' + escapeHtml(product.description) + '</p>' +
+          '<div class="card-actions">' +
+            '<a href="#' + escapeHtml(detailId) + '" class="btn btn-primary" onclick="showDetail(\'' + escapeHtml(detailId) + '\')">View Details</a>' +
+            '<a href="#quote" class="btn btn-secondary" data-add-quote="' + escapeHtml(product.id) + '">Quote</a>' +
+          '</div>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function renderCatalog() {
+    const grid = document.getElementById('catalog-grid');
+    const countEl = document.getElementById('catalog-result-count');
+    if (!grid) return;
+
+    const visible = sortProducts(filterProducts());
+    grid.innerHTML = visible.map(renderProductCard).join('');
+
+    if (countEl) {
+      const n = visible.length;
+      countEl.textContent = 'Showing ' + n + ' style' + (n === 1 ? '' : 's');
+    }
+  }
+
+  function initCatalogBrowse() {
+    updateCategoryCounts();
+    setActiveCategoryLink(catalogState.category);
+    renderCatalog();
+
+    const filterRoot = document.getElementById('category-filters');
+    if (filterRoot) {
+      filterRoot.addEventListener('click', function (event) {
+        const link = event.target.closest('a[data-category]');
+        if (!link) return;
+        const cat = link.getAttribute('data-category');
+        if (!cat) return;
+        catalogState.category = cat;
+        setActiveCategoryLink(cat);
+        renderCatalog();
+      });
+    }
+
+    const sortSelect = document.getElementById('catalog-sort');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function () {
+        catalogState.sort = sortSelect.value || 'featured';
+        renderCatalog();
+      });
+    }
+
+    const searchInput = document.getElementById('catalog-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        catalogState.query = searchInput.value || '';
+        renderCatalog();
+      });
+    }
+
+    const searchForm = document.getElementById('catalog-search-form');
+    if (searchForm) {
+      searchForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (searchInput) catalogState.query = searchInput.value || '';
+        renderCatalog();
+      });
+    }
+  }
+
+  window.addEventListener('load', function () {
+    initCatalogBrowse();
+    routeFromHash();
+  });
   window.addEventListener('hashchange', routeFromHash);
 </script>
+<script src="js/product-detail.js"></script>
+<script src="js/cart.js"></script>
 
 </body>
 </html>
